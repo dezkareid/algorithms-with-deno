@@ -1,4 +1,9 @@
-import Node from '../BaseNode/index.js';
+class Node{
+    constructor(value, next){
+        this.value = value;
+        this.next = next;
+    }
+}
 
 class Queue {
   constructor() {
@@ -18,10 +23,30 @@ class Queue {
       }
     }
 
-    while (temporalQueue.front) {
-      const valueInTop = temporalQueue.dequeue();
-      this.enqueue(valueInTop);
+    // ===== viejo codigo =====
+    //while (temporalQueue.front) {
+    //  const valueInTop = temporalQueue.dequeue();
+    //  this.enqueue(valueInTop);
+    //}
+
+    // ===== nuevo codigo =====
+    // regresar Queue a la normalidad
+    // remplazando la Queue vieja por temporalQueue
+    if(found && this.front){
+      while(this.front){
+        const valueInFrontToPutInTop = this.dequeue();
+        temporalQueue.enqueue(valueInFrontToPutInTop) 
+      }
+        
     }
+    // tomar el front y el top de la temporalQueue
+    // ya que se le hizo un dequeue por completo
+    // a la Queue original.
+    this.front = temporalQueue.front;
+    this.top = temporalQueue.top;
+   
+    
+
     return found;
   }
 
@@ -48,4 +73,20 @@ class Queue {
   }
 }
 
-export default Queue;
+/*
+
+// mini test.
+
+const myQ = new Queue();
+myQ.enqueue(10)
+myQ.enqueue(20)
+myQ.enqueue(30)
+myQ.enqueue(40)
+console.log(myQ)
+
+console.log(myQ.contains(20)) // true
+console.log(myQ)
+
+console.log(myQ.contains(50)) // false
+console.log(myQ)
+*/
