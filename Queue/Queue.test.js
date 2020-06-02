@@ -51,7 +51,7 @@ Deno.test("When Queue has two or more elements and one is dequeued the front cha
   assertEquals(queue.front, nextFront);
 });
 
-Deno.test("When Queue contains value should return true and front remains equals", () => {
+Deno.test("When Queue contains value should return true and front and order remains equals", () => {
   const queue = new Queue();
   queue.enqueue(10);
   queue.enqueue(20);
@@ -59,6 +59,7 @@ Deno.test("When Queue contains value should return true and front remains equals
   const front = queue.front;
   assert(queue.contains(30));
   assertEquals(queue.front, front);
+  assertEquals(front.next.value, 20);
 });
 
 Deno.test("When Queue is empty should return false", () => {
@@ -74,4 +75,5 @@ Deno.test("When Queue not contains value should return false and front remains e
   const front = queue.front;
   assert(!queue.contains(0));
   assertEquals(queue.front, front);
+  assertEquals(front.next.value, 20);
 });
